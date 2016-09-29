@@ -5,14 +5,15 @@
 n=1  # min N
 howmany = 5  # max N
 outlength = 200
-white_pounc = ['，','。','“','”','—','？','！','…','"',"'",'：','?','!','.',',']
+white_list = []
+white_punc = ['，','。','“','”','—','？','！','…','"',"'",'：','?','!','.',',']
 file_raw = open('put full path to youre text file here','r',encoding='utf-8')
 file_out = open('output file with or without full path','w',encoding='utf-8')
 full_text = ''
 
-for line in file_raw:  #read and remove punctuation (ok pounc is a typo)
+for line in file_raw:  #read and remove punctuation
     _ = line[:-1].strip().replace(' ','')
-    for ch in white_pounc:
+    for ch in white_punc:
         if ch in _:
             _ = _.replace(ch, '')
     full_text+=_
@@ -41,10 +42,10 @@ while n<=howmany:
     for element in values:
         if element[1] not in white_list:
             countp = 0
-            for p in white_pounc:
+            for p in white_punc:
                 if p not in element[1]:
                     countp+=1
-            if countp==len(white_pounc):
+            if countp==len(white_punc):
                 file_out.write(element[1]+'\t'+str(element[0])+'\n')
                 outcount+=1
         if outcount>outlength:
